@@ -1,0 +1,64 @@
+<div class="main-content">
+  <div class="card">
+    <div class="card-header card-header-text card-header-danger">
+      <div class="card-text">
+        <h3 class="card-title">Trivia Panel</h3>
+        <p class="card-category">Manage your trivia here. Manage your trivia here</p>
+      </div>
+      
+    </div>
+    <div class="card-body">
+      <button mat-raised-button class="btn btn-danger" (click)="openDialog()">
+        <i class="material-icons">add</i> Add Trivia
+      </button>
+      <br /><br />
+      <mat-divider></mat-divider>
+      <br />
+      <h3><i class="material-icons">wb_incandescent</i>Your Trivias</h3>
+      <div class="row">
+        <div class="col-md-4" style="margin-bottom: 20px;" *ngFor="let trivia of trivias">
+          <mat-card class="example-card" style="background-color: #f9f9f9">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title style="color: black;">User Name</mat-card-title>
+              <mat-card-subtitle>Created on: 1/1/1111 | {{ trivia.category }}</mat-card-subtitle>
+
+              <button mat-icon-button class="topright" (click)="onDelete(trivia.id)">
+                <mat-icon style="color: gray;">delete_outline</mat-icon>
+              </button>
+            </mat-card-header>
+            <img
+              mat-card-image
+              src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/08/09/10/coco-cola.jpg"
+              alt="Photo of.."
+            />
+            <mat-card-content>
+              <h4>{{ trivia.question }}</h4>
+              <p>
+                  The Coca-Cola Company is an American corporation, and manufacturer, retailer, and marketer of nonalcoholic beverage concentrates and syrups. The company is best known for its flagship product Coca-Cola, invented in 1886 by pharmacist John Stith Pemberton in Atlanta, Georgia.
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <mat-accordion>
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Answers
+                        </mat-panel-title>
+                        <mat-panel-description style="color:green">
+                            {{ trivia.correct_answer }} &nbsp;<i class="material-icons">check_circle_outline</i>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <p *ngFor="let choice of trivia.choices">
+                          <span [ngStyle]="{'color': choice==trivia.correct_answer? 'green' : ''}">• {{choice}}</span>
+                      </p>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

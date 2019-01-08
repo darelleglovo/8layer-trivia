@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header card-header-icon card-header-danger">
+              <div class="card-icon">
+                <i class="material-icons">add</i>
+              </div>
+              <h4 class="card-title">Add New Trivia</h4>
+            </div>
+            <div class="card-body">
+                <!-- The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona... -->
+                <div class="row">
+                    <div class="col">
+                        <form (submit)="onAddTrivia(triviaForm)" #triviaForm="ngForm">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="Trivia Title" name="title" required ngModel #title="ngModel">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-select placeholder="Category" name="category" required ngModel #category="ngModel">
+                                    <mat-option value="Health">
+                                        Health
+                                    </mat-option>
+                                    <mat-option value="History">
+                                        History
+                                    </mat-option>
+                                    <mat-option value="Theoretical Physics">
+                                        Theoretical Physics
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <textarea matInput placeholder="Question" name="question" required ngModel #question="ngModel"></textarea>
+                            </mat-form-field> 
+                            <mat-form-field class="example-chip-list">
+                                <mat-chip-list required #chipList>
+                                    <mat-chip *ngFor="let choice of choices" [selectable]="selectable"
+                                            [removable]="removable" (removed)="remove(choice)">
+                                    {{choice}}
+                                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                    </mat-chip>
+                                    <input placeholder="Enter answer choices..."
+                                            [matChipInputFor]="chipList"
+                                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                            [matChipInputAddOnBlur]="addOnBlur"
+                                            (matChipInputTokenEnd)="add($event)">
+                                </mat-chip-list>
+                            </mat-form-field>
+                            <mat-form-field>
+                                    <mat-select placeholder="Correct answer" name="correct_answer" required ngModel #correct_answer="ngModel">
+                                        <mat-option *ngFor="let choice of choices" value="{{ choice }}">
+                                            {{ choice }}
+                                        </mat-option>
+                                    </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                    <textarea matInput placeholder="Trivia" name="triviaProp" required ngModel #triviaProp="ngModel"></textarea>
+                            </mat-form-field>
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail img-circle">
+                                    <img src="" alt="...">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail img-circle"></div>
+                                <div>
+                                    <span class="btn btn-round btn-rose btn-file">
+                                        <span class="fileinput-new">Add Photo</span>
+                                        <span class="fileinput-exists">Change</span>
+                                            <input type="file" name="..." />
+                                    </span>
+                                    <br />
+                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                </div>
+                            </div>
+                            <!-- <mat-form-field>
+                                <mat-select placeholder="Day" name="day" required ngModel #day="ngModel">
+                                    <mat-option value="monday">
+                                        Monday
+                                    </mat-option>
+                                    <mat-option value="tuesday">
+                                        Tuesday
+                                    </mat-option>
+                                    <mat-option value="wednesday">
+                                        Wednesday
+                                    </mat-option>
+                                    <mat-option value="thursday">
+                                        Thursday
+                                    </mat-option>
+                                    <mat-option value="friday">
+                                        Friday
+                                    </mat-option>
+                                    <mat-option value="satruday">
+                                        Saturday
+                                    </mat-option>
+                                    <mat-option value="sunday">
+                                        Sunday
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field> -->
+                            <button mat-raised-button class="btn btn-default">Cancel</button>
+                            <button mat-raised-button class="btn btn-danger" type="submit">Add</button>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
