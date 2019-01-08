@@ -11,12 +11,13 @@
                 <!-- The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona... -->
                 <div class="row">
                     <div class="col">
-                        <form (submit)="onAddTrivia(triviaForm)" #triviaForm="ngForm">
+                        <form [formGroup]="form" (submit)="onAddTrivia()">
                             <mat-form-field class="example-full-width">
-                                <input matInput type="text" placeholder="Trivia Title" name="title" required ngModel #title="ngModel">
+                                <input matInput type="text" placeholder="Trivia Title" formControlName="title" name="title" required>
+                                <mat-error *ngIf="form.get('title').invalid">Please enter a</mat-error>
                             </mat-form-field>
                             <mat-form-field>
-                                <mat-select placeholder="Category" name="category" required ngModel #category="ngModel">
+                                <mat-select placeholder="Category" formControlName="category" name="category" required>
                                     <mat-option value="Health">
                                         Health
                                     </mat-option>
@@ -29,7 +30,7 @@
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field class="example-full-width">
-                                <textarea matInput placeholder="Question" name="question" required ngModel #question="ngModel"></textarea>
+                                <textarea matInput placeholder="Question" formControlName="question" name="question" required></textarea>
                             </mat-form-field> 
                             <mat-form-field class="example-chip-list">
                                 <mat-chip-list required #chipList>
@@ -46,30 +47,16 @@
                                 </mat-chip-list>
                             </mat-form-field>
                             <mat-form-field>
-                                    <mat-select placeholder="Correct answer" name="correct_answer" required ngModel #correct_answer="ngModel">
+                                    <mat-select placeholder="Correct answer" formControlName="correct_answer" name="correct_answer" required>
                                         <mat-option *ngFor="let choice of choices" value="{{ choice }}">
                                             {{ choice }}
                                         </mat-option>
                                     </mat-select>
                             </mat-form-field>
                             <mat-form-field class="example-full-width">
-                                    <textarea matInput placeholder="Trivia" name="triviaProp" required ngModel #triviaProp="ngModel"></textarea>
+                                    <textarea matInput placeholder="Trivia" formControlName="triviaProp" name="triviaProp" required></textarea>
                             </mat-form-field>
-                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                <div class="fileinput-new thumbnail img-circle">
-                                    <img src="" alt="...">
-                                </div>
-                                <div class="fileinput-preview fileinput-exists thumbnail img-circle"></div>
-                                <div>
-                                    <span class="btn btn-round btn-rose btn-file">
-                                        <span class="fileinput-new">Add Photo</span>
-                                        <span class="fileinput-exists">Change</span>
-                                            <input type="file" name="..." />
-                                    </span>
-                                    <br />
-                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                                </div>
-                            </div>
+                            
                             <!-- <mat-form-field>
                                 <mat-select placeholder="Day" name="day" required ngModel #day="ngModel">
                                     <mat-option value="monday">
@@ -95,7 +82,11 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field> -->
-                            <button mat-raised-button class="btn btn-default">Cancel</button>
+                            <div>
+                                <button mat-stroked-button (click)="filePicker.click()" type="button">Pick Image</button>
+                                <input type="file" #filePicker> 
+                            </div>
+                            <button mat-raised-button mat-dialog-close class="btn btn-default">Cancel</button>
                             <button mat-raised-button class="btn btn-danger" type="submit">Add</button>
                         </form>
                     </div>

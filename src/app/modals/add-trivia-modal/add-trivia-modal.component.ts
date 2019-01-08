@@ -4,7 +4,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
 
 import { TriviaCrudService } from '../../trivia-crud.service'
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 
 export interface Choices {
   name: string;
@@ -12,7 +12,8 @@ export interface Choices {
 
 @Component({
   selector: 'app-add-trivia',
-  templateUrl: './add-trivia-modal.component.html'
+  templateUrl: './add-trivia-modal.component.html',
+  styleUrls: ['./add-trivia-modal.component.css']
 })
 export class AddTriviaModal implements OnInit {
   visible = true;
@@ -21,6 +22,7 @@ export class AddTriviaModal implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   choices: string[] = [];
+  form: FormGroup;
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -53,21 +55,39 @@ export class AddTriviaModal implements OnInit {
         public triviaCrudService: TriviaCrudService
       ) { }
   
-  onAddTrivia(form: NgForm){
-    if (form.invalid){
+  onAddTrivia(){
+    if (this.form.invalid){
       return;
     }
     if (this.choices.length != 4){
       alert('Answer choices should be only 4');
       return;
     }
-    this.triviaCrudService.addTrivia(form.value.title, form.value.question, form.value.category, this.choices, form.value.correct_answer, form.value.triviaProp);
+    this.triviaCrudService.addTrivia(this.form.value.title, this.form.value.question, this.form.value.category, this.choices, this.form.value.correct_answer, this.form.value.triviaProp);
     this.choices = [];
-    form.resetForm();
+    this.form.reset();
+    this.dialogRef.close();
+    
   }
 
   ngOnInit() {
-    
+    this.form = new FormGroup({
+      'title': new FormControl(null, {
+        validators: [Validators.required, Validators.minLength(3)]
+      }),
+      'category': new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      'question': new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      'correct_answer': new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      'triviaProp': new FormControl(null, {
+        validators: [Validators.required]
+      }),
+    });
   }
 
 }
