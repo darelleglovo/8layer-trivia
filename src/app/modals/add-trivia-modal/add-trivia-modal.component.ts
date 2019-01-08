@@ -6,6 +6,8 @@ import {MatChipInputEvent} from '@angular/material';
 import { TriviaCrudService } from '../../trivia-crud.service'
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { mimeType } from "./mime-type.validator"
+
 export interface Choices {
   name: string;
 }
@@ -23,6 +25,7 @@ export class AddTriviaModal implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   choices: string[] = [];
   form: FormGroup;
+  imagePreview: any;
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -63,11 +66,24 @@ export class AddTriviaModal implements OnInit {
       alert('Answer choices should be only 4');
       return;
     }
-    this.triviaCrudService.addTrivia(this.form.value.title, this.form.value.question, this.form.value.category, this.choices, this.form.value.correct_answer, this.form.value.triviaProp);
+    this.triviaCrudService.addTrivia(this.form.value.title, this.form.value.question, this.form.value.category, this.choices, this.form.value.correct_answer, this.form.value.triviaProp, this.form.value.image);
     this.choices = [];
     this.form.reset();
     this.dialogRef.close();
     
+  }
+
+  onImagePicked(event: Event){
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({image: file});
+    this.form.get('image').updateValueAndValidity();
+    // console.log(file);
+    // console.log(this.form);
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+    };
+    reader.readAsDataURL(file);
   }
 
   ngOnInit() {
@@ -86,6 +102,10 @@ export class AddTriviaModal implements OnInit {
       }),
       'triviaProp': new FormControl(null, {
         validators: [Validators.required]
+      }),
+      'image': new FormControl(null, {
+        validators: [Validators.required],
+        asyncValidators: mimeType
       }),
     });
   }

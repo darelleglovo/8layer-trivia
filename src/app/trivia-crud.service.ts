@@ -45,39 +45,35 @@ export class TriviaCrudService {
     return this.triviasUpdated.asObservable(); // make this 'subject' available to other components then subscribe
   }
 
+  addTrivia(title: string, question: string, category: string, choices: string[], correct_answer: string, triviaProp: string, image: File){
+    //const trivia: Trivia = { id: null, title: title, question: question, category: category, choices: choices, correct_answer: correct_answer, triviaProp: triviaProp }
+    const triviaData = new FormData();
+    triviaData.append("title", title);
+    triviaData.append("question", question);
+    triviaData.append("category", category);
+    triviaData.append("choices", JSON.stringify(choices));
+    triviaData.append("correct_answer", correct_answer);
+    triviaData.append("triviaProp", triviaProp);
+    triviaData.append("image", image, title);
 
-  // addPost(title: string, content: string) {
-  //   const post: Post = { id: null, title: title, content: content };
-  //   this.http
-  //     .post<{message: string, postId: string}>('http://localhost:3000/api/posts', post)
-  //     .subscribe(
-  //       responseData => { // <- success handler
-  //         console.log(responseData.message);
-  //         const id = responseData.postId;
-  //         // <-- execute this when recieved a success response -->
-  //         post.id = id;  // update the id of "post" which is currently null
-  //         this.posts.push(post); // push new data to Post array
-  //         this.postsUpdated.next([...this.posts]); // like emmit
-  //         // <-- --------------------------------------------- -->
-  //       });
-  //       // <{message: string}> gets some data back, will get a message with a type of string
-  //       // 2nd argument 'post' = the data that will be POST
-  //       // nothing will happen if we don't subscribe
-  //       // les 2 - lec 11
-
-  // }
-
-  addTrivia(title: string, question: string, category: string, choices: string[], correct_answer: string, triviaProp: string){
-    const trivia: Trivia = { id: null, title: title, question: question, category: category, choices: choices, correct_answer: correct_answer, triviaProp: triviaProp }
-    //alert(trivia.title + trivia.question + trivia.category + trivia.choices);
-    console.log(trivia);
-    console.log("trivia hi");
+    // console.log(trivia);
+    // console.log("trivia hi");
 
     this.http
-      .post<{message: string, triviaId: string}>('http://localhost:3000/api/trivias', trivia)
+      .post<{message: string, triviaId: string}>('http://localhost:3000/api/trivias', triviaData)
       .subscribe(
         responseData => { // <- success handler
           console.log(responseData.message);
+
+          const trivia: Trivia = {
+            id: responseData.triviaId, 
+            title: title, 
+            question: question, 
+            category: category, 
+            choices: choices, 
+            correct_answer: correct_answer, 
+            triviaProp: triviaProp
+          };
           const id = responseData.triviaId;
           console.log(id);
           // <-- execute this when recieved a success response -->

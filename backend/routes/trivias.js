@@ -4,6 +4,29 @@ const router = express.Router();
 
 const Trivia = require("../models/trivia");
 
+const MIME_TYPE_MAP = {
+  'image/png': 'png',
+  'image/jpeg': 'jpg',
+  'image/jpg': 'jpg'
+}
+
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const isValid = MIME_TYPE_MAP[file.mimetype];
+    let error = new Error("Invalid mime type");
+    if (isValid){
+      error = null
+    }
+    cb(null, "backend/images");
+  },
+  filename: (req, file, cb) => {
+    const name = file.originalname.toLowerCase().split(' ').join('-');
+    const ext = MIME_TYPE_MAP[file.mimetype];
+    cb(null, name + '-' + Date.now() + '-' + ext);
+  }
+});
+
 router.get("", (req, res, next) => {
   Trivia.find().then(documents => {
     console.log(documents);
@@ -14,7 +37,7 @@ router.get("", (req, res, next) => {
   });
 });
 
-router.post("", (req, res, next) => {
+router.post("", multer({storage: storage}).single("image"), (req, res, next) => {
   const trivia = new Trivia({
     title: req.body.title,
     question: req.body.question,
