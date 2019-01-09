@@ -29,13 +29,13 @@
             </mat-card-header>
             <img
               mat-card-image
-              src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/08/09/10/coco-cola.jpg"
+              [src]="trivia.imagePath"
               alt="Photo of.."
             />
             <mat-card-content>
               <h4>{{ trivia.question }}</h4>
               <p>
-                  The Coca-Cola Company is an American corporation, and manufacturer, retailer, and marketer of nonalcoholic beverage concentrates and syrups. The company is best known for its flagship product Coca-Cola, invented in 1886 by pharmacist John Stith Pemberton in Atlanta, Georgia.
+                {{ trivia.triviaProp }}
               </p>
             </mat-card-content>
             <mat-card-actions>

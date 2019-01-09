@@ -31,7 +31,8 @@ export class TriviaCrudService {
             choices: trivia.choices,
             correct_answer: trivia.correct_answer,
             triviaProp: trivia.triviaProp,
-            id: trivia._id
+            id: trivia._id,
+            imagePath: trivia.imagePath
           }
         });
       })) // yung data na naprocess dito, subscribe mo sa baba then name it "transformedPosts"
@@ -60,21 +61,22 @@ export class TriviaCrudService {
     // console.log("trivia hi");
 
     this.http
-      .post<{message: string, triviaId: string}>('http://localhost:3000/api/trivias', triviaData)
+      .post<{message: string, trivia: Trivia}>('http://localhost:3000/api/trivias', triviaData)
       .subscribe(
         responseData => { // <- success handler
           console.log(responseData.message);
 
           const trivia: Trivia = {
-            id: responseData.triviaId, 
+            id: responseData.trivia.id, 
             title: title, 
             question: question, 
             category: category, 
             choices: choices, 
             correct_answer: correct_answer, 
-            triviaProp: triviaProp
+            triviaProp: triviaProp,
+            imagePath: responseData.trivia.imagePath
           };
-          const id = responseData.triviaId;
+          const id = responseData.trivia.id;
           console.log(id);
           // <-- execute this when recieved a success response -->
           trivia.id = id;  // update the id of "post" which is currently null

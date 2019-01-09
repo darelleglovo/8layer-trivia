@@ -67,6 +67,7 @@ export class AddTriviaModal implements OnInit {
       return;
     }
     this.triviaCrudService.addTrivia(this.form.value.title, this.form.value.question, this.form.value.category, this.choices, this.form.value.correct_answer, this.form.value.triviaProp, this.form.value.image);
+    console.log(this.form);
     this.choices = [];
     this.form.reset();
     this.dialogRef.close();
@@ -78,7 +79,7 @@ export class AddTriviaModal implements OnInit {
     this.form.patchValue({image: file});
     this.form.get('image').updateValueAndValidity();
     // console.log(file);
-    // console.log(this.form);
+     console.log(this.form);
     const reader = new FileReader();
     reader.onload = () => {
       this.imagePreview = reader.result;

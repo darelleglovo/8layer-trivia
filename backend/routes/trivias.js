@@ -38,26 +38,32 @@ router.get("", (req, res, next) => {
 });
 
 router.post("", multer({storage: storage}).single("image"), (req, res, next) => {
+  const url = req.protocol +  '://' + req.get("host");
   const trivia = new Trivia({
     title: req.body.title,
     question: req.body.question,
     category: req.body.category,
     choices: req.body.choices,
     correct_answer: req.body.correct_answer,
-    triviaProp: req.body.triviaProp
-  });
-  // trivia.save();
-  // console.log(trivia);
-  // res.status(201).json({
-  //   message: "Trivia added successfully"
-  // });
+    triviaProp: req.body.triviaProp,
+    imagePath: url + '/images/' + req.file.filename
 
+  });
   trivia.save().then(createdTrivia => {
     // createdPost = post that was created from post
     console.log(createdTrivia);
     res.status(201).json({
       message: "Trivia added sucsflysadasd",
-      triviaId: createdTrivia._id
+      trivia: {
+        id: createdTrivia._id,
+        title: createdTrivia.title,
+        question: createdTrivia.question,
+        category: createdTrivia.category,
+        choices: createdTrivia.choices,
+        correct_answer: createdTrivia.correct_answer,
+        triviaProp: createdTrivia.triviaProp,
+        imagePath: url + '/images/' + req.file.filename
+      }
     });
   });
 });
