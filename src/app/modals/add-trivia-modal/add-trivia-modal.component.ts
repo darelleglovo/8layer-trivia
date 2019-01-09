@@ -66,6 +66,7 @@ export class AddTriviaModal implements OnInit {
       alert('Answer choices should be only 4');
       return;
     }
+    console.log(this.choices);
     this.triviaCrudService.addTrivia(this.form.value.title, this.form.value.question, this.form.value.category, this.choices, this.form.value.correct_answer, this.form.value.triviaProp, this.form.value.image);
     console.log(this.form);
     this.choices = [];

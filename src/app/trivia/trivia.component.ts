@@ -33,7 +33,7 @@ export class TriviaComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.triviaService.getPosts();
+    this.triviaService.getTrivias();
     this.triviaSub = this.triviaService.getTriviaUpdateListener()
     .subscribe((trivias: Trivia[]) => {
       this.trivias = trivias;

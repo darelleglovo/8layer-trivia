@@ -43,7 +43,7 @@ router.post("", multer({storage: storage}).single("image"), (req, res, next) => 
     title: req.body.title,
     question: req.body.question,
     category: req.body.category,
-    choices: req.body.choices,
+    choices: JSON.parse(req.body.choices),
     correct_answer: req.body.correct_answer,
     triviaProp: req.body.triviaProp,
     imagePath: url + '/images/' + req.file.filename

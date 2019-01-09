@@ -17,13 +17,14 @@ export class TriviaCrudService {
   private triviasUpdated = new Subject<Trivia[]>(); // list of 'Post' type // property name should sounds like event
   constructor(private http: HttpClient) { }
 
-  getPosts() {
+  getTrivias() {
     this.http
     .get<{message: string, trivias: any}>(
       'http://localhost:3000/api/trivias'
       ) // ^ yung data na makukuha mo dito i map mo dito sa baba.. v name it "postData"
       .pipe(map(triviaData => { // map/grab whole post data which has "message"-string and "posts-"object, name it "postData"
         return triviaData.trivias.map(trivia => { // now get the "posts"-object from postData and name it "post". (disregarding "message"-string)
+          console.log(trivia.choices);
           return { // get all "post" from postData.posts then transform it. (mainly from "_id" to "id")
             title: trivia.title,
             question: trivia.question,
@@ -53,6 +54,7 @@ export class TriviaCrudService {
     triviaData.append("question", question);
     triviaData.append("category", category);
     triviaData.append("choices", JSON.stringify(choices));
+    // triviaData.append("choices", choices);  DONT INCLUDE ARRAY
     triviaData.append("correct_answer", correct_answer);
     triviaData.append("triviaProp", triviaProp);
     triviaData.append("image", image, title);

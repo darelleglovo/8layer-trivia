@@ -7,5 +7,6 @@ export interface Trivia {
     category: string,
     choices: string[],
     correct_answer: string,
-    triviaProp: string
+    triviaProp: string,
+    imagePath: string
 }
