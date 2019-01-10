@@ -46,7 +46,11 @@ router.post("", multer({storage: storage}).single("image"), (req, res, next) => 
     choices: JSON.parse(req.body.choices),
     correct_answer: req.body.correct_answer,
     triviaProp: req.body.triviaProp,
-    imagePath: url + '/images/' + req.file.filename
+    imagePath: url + '/images/' + req.file.filename,
+    blast_day: req.body.blast_day,
+    blast_hour: req.body.blast_hour,
+    blast_from: req.body.blast_from,
+    blast_to: req.body.blast_to
 
   });
   trivia.save().then(createdTrivia => {

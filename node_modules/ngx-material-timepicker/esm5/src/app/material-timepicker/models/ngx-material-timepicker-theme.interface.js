@@ -1,0 +1,17 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+export function NgxMaterialTimepickerTheme() { }
+if (false) {
+    /** @type {?|undefined} */
+    NgxMaterialTimepickerTheme.prototype.container;
+    /** @type {?|undefined} */
+    NgxMaterialTimepickerTheme.prototype.dial;
+    /** @type {?|undefined} */
+    NgxMaterialTimepickerTheme.prototype.clockFace;
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmd4LW1hdGVyaWFsLXRpbWVwaWNrZXItdGhlbWUuaW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vbmd4LW1hdGVyaWFsLXRpbWVwaWNrZXIvIiwic291cmNlcyI6WyJzcmMvYXBwL21hdGVyaWFsLXRpbWVwaWNrZXIvbW9kZWxzL25neC1tYXRlcmlhbC10aW1lcGlja2VyLXRoZW1lLmludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBSUEsZ0RBSUM7OztJQUhHLCtDQUFnRDs7SUFDaEQsMENBQXNDOztJQUN0QywrQ0FBMkMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge05neE1hdGVyaWFsVGltZXBpY2tlckRpYWxUaGVtZX0gZnJvbSAnLi9uZ3gtbWF0ZXJpYWwtdGltZXBpY2tlci1kaWFsLXRoZW1lLmludGVyZmFjZSc7XHJcbmltcG9ydCB7Tmd4TWF0ZXJpYWxUaW1lcGlja2VyRmFjZVRoZW1lfSBmcm9tICcuL25neC1tYXRlcmlhbC10aW1lcGlja2VyLWZhY2UtdGhlbWUuaW50ZXJmYWNlJztcclxuaW1wb3J0IHtOZ3hNYXRlcmlhbFRpbWVwaWNrZXJDb250YWluZXJUaGVtZX0gZnJvbSAnLi9uZ3gtbWF0ZXJpYWwtdGltZXBpY2tlci1jb250YWluZXItdGhlbWUuaW50ZXJmYWNlJztcclxuXHJcbmV4cG9ydCBpbnRlcmZhY2UgTmd4TWF0ZXJpYWxUaW1lcGlja2VyVGhlbWUge1xyXG4gICAgY29udGFpbmVyPzogTmd4TWF0ZXJpYWxUaW1lcGlja2VyQ29udGFpbmVyVGhlbWU7XHJcbiAgICBkaWFsPzogTmd4TWF0ZXJpYWxUaW1lcGlja2VyRGlhbFRoZW1lO1xyXG4gICAgY2xvY2tGYWNlPzogTmd4TWF0ZXJpYWxUaW1lcGlja2VyRmFjZVRoZW1lO1xyXG59XHJcbiJdfQ==

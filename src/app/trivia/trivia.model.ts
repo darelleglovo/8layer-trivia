@@ -8,5 +8,9 @@ export interface Trivia {
     choices: string[],
     correct_answer: string,
     triviaProp: string,
-    imagePath: string
+    imagePath: string,
+    blast_day: string,
+    blast_hour: string,
+    blast_from: string,
+    blast_to: string
 }

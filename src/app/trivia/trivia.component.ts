@@ -21,7 +21,7 @@ export class TriviaComponent implements OnInit, OnDestroy {
   
   openDialog(){
     let dialogBoxSettings = {
-      width: '900px',
+      width: '1100px',
       margin: '0 auto',
       hasBackdrop: true,
     };

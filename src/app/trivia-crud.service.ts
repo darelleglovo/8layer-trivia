@@ -47,7 +47,7 @@ export class TriviaCrudService {
     return this.triviasUpdated.asObservable(); // make this 'subject' available to other components then subscribe
   }
 
-  addTrivia(title: string, question: string, category: string, choices: string[], correct_answer: string, triviaProp: string, image: File){
+  addTrivia(title: string, question: string, category: string, choices: string[], correct_answer: string, triviaProp: string, image: File, blast_day: string, blast_hour: string, blast_from: string, blast_to: string){
     //const trivia: Trivia = { id: null, title: title, question: question, category: category, choices: choices, correct_answer: correct_answer, triviaProp: triviaProp }
     const triviaData = new FormData();
     triviaData.append("title", title);
@@ -58,6 +58,10 @@ export class TriviaCrudService {
     triviaData.append("correct_answer", correct_answer);
     triviaData.append("triviaProp", triviaProp);
     triviaData.append("image", image, title);
+    triviaData.append("blast_day", blast_day);
+    triviaData.append("blast_hour", blast_hour);
+    triviaData.append("blast_from", blast_from);
+    triviaData.append("blast_to", blast_to);
 
     // console.log(trivia);
     // console.log("trivia hi");
@@ -76,7 +80,11 @@ export class TriviaCrudService {
             choices: choices, 
             correct_answer: correct_answer, 
             triviaProp: triviaProp,
-            imagePath: responseData.trivia.imagePath
+            imagePath: responseData.trivia.imagePath,
+            blast_day: blast_day,
+            blast_hour: blast_hour,
+            blast_from: blast_from,
+            blast_to: blast_to
           };
           const id = responseData.trivia.id;
           console.log(id);

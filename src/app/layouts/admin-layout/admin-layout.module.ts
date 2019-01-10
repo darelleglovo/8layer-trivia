@@ -7,7 +7,8 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { TriviaComponent } from '../../trivia/trivia.component';
 import { AddTriviaModal } from '../../modals/add-trivia-modal/add-trivia-modal.component';
-
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 
 import {
@@ -41,8 +42,9 @@ import {
     MatChipsModule,
     MatDividerModule,
     MatCardModule,
-    MatExpansionModule
-    
+    MatExpansionModule,
+    NgxMaterialTimepickerModule.forRoot(),
+    NgxDaterangepickerMd.forRoot()
   ],
   declarations: [
     DashboardComponent,

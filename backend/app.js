@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
-// yNJpYwOr96v3sn4C
+// yNJpYwOr96v3sn4C mongo key
 
 const app = express();
 const mongoose = require("mongoose");

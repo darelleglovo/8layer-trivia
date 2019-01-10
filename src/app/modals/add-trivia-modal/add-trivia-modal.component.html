@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col">
+            <mat-dialog-content>
         <div class="card">
             <div class="card-header card-header-icon card-header-danger">
               <div class="card-icon">
@@ -11,7 +12,8 @@
                 <!-- The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona... -->
                 <div class="row">
                     <div class="col">
-                        <form [formGroup]="form" (submit)="onAddTrivia()">
+                        <h3>Trivia Info</h3>
+                        <form [formGroup]="form" id="addTriviaForm" (submit)="onAddTrivia()">
                             <mat-form-field class="example-full-width">
                                 <input matInput type="text" placeholder="Trivia Title" formControlName="title" name="title" required>
                                 <mat-error *ngIf="form.get('title').invalid">Please enter a</mat-error>
@@ -57,31 +59,7 @@
                                     <textarea matInput placeholder="Trivia" formControlName="triviaProp" name="triviaProp" required></textarea>
                             </mat-form-field>
                             
-                            <!-- <mat-form-field>
-                                <mat-select placeholder="Day" name="day" required ngModel #day="ngModel">
-                                    <mat-option value="monday">
-                                        Monday
-                                    </mat-option>
-                                    <mat-option value="tuesday">
-                                        Tuesday
-                                    </mat-option>
-                                    <mat-option value="wednesday">
-                                        Wednesday
-                                    </mat-option>
-                                    <mat-option value="thursday">
-                                        Thursday
-                                    </mat-option>
-                                    <mat-option value="friday">
-                                        Friday
-                                    </mat-option>
-                                    <mat-option value="satruday">
-                                        Saturday
-                                    </mat-option>
-                                    <mat-option value="sunday">
-                                        Sunday
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field> -->
+                            
                             <div>
                                 <button mat-stroked-button (click)="filePicker.click()" type="button">Pick Image</button>
                                 <input type="file" #filePicker (change)=onImagePicked($event)> 
@@ -89,12 +67,60 @@
                             <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview">
                                 <img [src]="imagePreview" [alt]="form.value.title">
                             </div>
-                            <button mat-raised-button mat-dialog-close class="btn btn-default">Cancel</button>
-                            <button mat-raised-button class="btn btn-danger" type="submit">Add</button>
+                            <br>
+                            <mat-divider></mat-divider>
+                            <h3>Subscription Details</h3>
+                            <!-- <p>Blast every: {{blast_day}}</p>
+                            <p>at:{{blast_hour}}</p>
+                            <p>From: {{blast_date_from}} To: {{blast_date_to}}</p> -->
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <mat-form-field>
+                                        <mat-select placeholder="Day" formControlName="blast_day" name="blast_day"  required >
+                                            <mat-option value="monday">
+                                                Monday
+                                            </mat-option>
+                                            <mat-option value="tuesday">
+                                                Tuesday
+                                            </mat-option>
+                                            <mat-option value="wednesday">
+                                                Wednesday
+                                            </mat-option>
+                                            <mat-option value="thursday">
+                                                Thursday
+                                            </mat-option>
+                                            <mat-option value="friday">
+                                                Friday
+                                            </mat-option>
+                                            <mat-option value="satruday">
+                                                Saturday
+                                            </mat-option>
+                                            <mat-option value="sunday">
+                                                Sunday
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <mat-form-field>
+                                        <input formControlName="blast_hour" name="blast_hour" readonly matInput type="text" placeholder="Time" onkeypress="return false;"  [ngxTimepicker]="picker">
+                                        <ngx-material-timepicker #picker></ngx-material-timepicker>
+                                    </mat-form-field>
+                                </div>
+                                
+                            </div>
+                            <div class="">
+                                <input formControlName="blast_date_range" type="text" ngxDaterangepickerMd placeholder="Choose date range.."/>
+                            </div>
+                            
                         </form>
                     </div>
                 </div>
-                
             </div>
         </div>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-raised-button mat-dialog-close class="btn btn-default">Cancel</button>
+            <button mat-raised-button class="btn btn-danger" form="addTriviaForm" type="submit">Add</button>
+        </mat-dialog-actions>
     </div>
